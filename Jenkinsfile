@@ -11,8 +11,6 @@ pipeline {
             }
             steps {                
                 sh '''
-                    echo "Hola Mundo pedorrrrrrro, pero con sh commands"'
-                    whoami      
                     ls -la              
                     node --version
                     npm --version
