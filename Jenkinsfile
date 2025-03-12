@@ -2,12 +2,24 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hola Mundo Pedorro !!!'
-                sh 'echo "Hola Mundo pedorrrrrrro, pero con sh commands"'
-                sh 'whoami'
-                
+        stage('Build') {
+            agent{
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {                
+                sh '''
+                    echo "Hola Mundo pedorrrrrrro, pero con sh commands"'
+                    whoami      
+                    ls -la              
+                    node --version
+                    npm --version
+                    npm ci
+                    npm run build
+                    ls -la
+                '''
             }
         }
     }
